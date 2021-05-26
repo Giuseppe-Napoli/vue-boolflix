@@ -27,7 +27,6 @@ export default {
     return{
       apiURL: 'https://api.themoviedb.org/3/search/movie',
       api_key: '6dfd8194553fe1b84032137a9761e594',
-      query: 'madagascar',
       listFilm: [],
       textToSearch:'',
 
@@ -37,6 +36,20 @@ export default {
    methods: {
      searching(txt){
        this.textToSearch = txt;
+       axios.get(this.apiURL,{
+        params:{
+          api_key: this.api_key,
+          query: txt,
+          language: 'it-IT'
+        }
+      })
+      .then(resp =>{
+        this.listFilm = resp.data.results
+        console.log('---->',this.listFilm);
+      })
+      .catch(err => {
+        console.log(err);
+      })
      }
     // axios va messo qui dentro una funzione callApi()
     
@@ -53,20 +66,7 @@ export default {
   },
 
     created(){
-      axios.get(this.apiURL,{
-        params:{
-          api_key: this.api_key,
-          query: this.query,
-          language: 'it-IT'
-        }
-      })
-      .then(resp =>{
-        this.listFilm = resp.data.results
-        console.log('---->',this.listFilm);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+      
   },
 
 
