@@ -3,11 +3,11 @@
     <Header 
     @searchFilm='searching'
     />
-    <!-- chiamando l'API nel App.vue dovro passare l'array listFilm*  nella props della Main.vue a quel punto ciclerò tutti i film che mi ritorneranno indietro grazie al bind di listFilm* 
-    * = l'array originale che prima era listFilm verrà filtrato all'interno di computed e trasformato in filterFilm-->
+    <!-- chiamando l'API nel App.vue dovro passare l'array listFilm nella props della Main.vue a quel punto ciclerò tutti i film che mi ritorneranno indietro grazie al bind di listFilm-->
     <Main 
-    :filterFilm="filterFilm"/>
+    :listFilm="listFilm"/>
   </div>
+  
 </template>
 
 <script>
@@ -36,6 +36,7 @@ export default {
    methods: {
      searching(txt){
        this.textToSearch = txt;
+       /* chiamata API, passando al query il txt qualunque film digito (presente nella libreria) mi verra stampato a schermo */
        axios.get(this.apiURL,{
         params:{
           api_key: this.api_key,
@@ -51,23 +52,10 @@ export default {
         console.log(err);
       })
      }
-    // axios va messo qui dentro una funzione callApi()
     
   },
       
-  computed: {
-    filterFilm(){
-      let cleanFilm = this.listFilm.filter(item => item.title != undefined)
-      if(this.textToSearch === ""){
-        return cleanFilm;
-      }
-      return cleanFilm.filter(item => item.title.toLowerCase().includes(this.textToSearch.toLowerCase()))
-    }
-  },
 
-    created(){
-      
-  },
 
 
 
@@ -78,5 +66,5 @@ export default {
 
 <style lang="scss">
   @import './assets/style/general.scss'
-
+  
 </style>

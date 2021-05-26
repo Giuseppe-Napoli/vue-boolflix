@@ -1,9 +1,9 @@
 <template>
   <main class="container mt-5">
     <div class="d-flex flex-wrap">
-    <!-- ciclo i miei film nella listFilm (successivamente filtrato e diventato filterFilm) e li stampo all'interno della main grazie al v-bind di film, precedentemente dichiarato nel comp film.vue attraverso il props-->
+    <!-- ciclo i miei film nella listFilm e li stampo all'interno della main grazie al v-bind di film, precedentemente dichiarato nel comp film.vue attraverso il props-->
       <Film 
-          v-for="(film, index) in filterFilm"
+          v-for="(film, index) in listFilm"
           :key="index"
           :film="film" />
     </div>
@@ -17,7 +17,7 @@ import Film from './Film'
 export default {
   name: 'Main',
   props:{
-    filterFilm:Array
+    listFilm:Array
   },
 
     components: {
