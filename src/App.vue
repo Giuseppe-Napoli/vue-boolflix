@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <Header 
     @searchFilm='searching'
     />
@@ -15,6 +16,7 @@
     v-if="listFilm.tv.length > 0"
     :listFilm="listFilm.tv"
     type='tv'/>
+
   </div>
   
 </template>
@@ -90,6 +92,11 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './assets/style/general.scss'
-  
+  @import './assets/style/general.scss';
+
+  body{
+    background-image: url('~@/assets/img/netflix.jpg');
+    height: 100vh;
+  }
+
 </style>

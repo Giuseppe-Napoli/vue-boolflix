@@ -1,5 +1,5 @@
 <template>
-  <main class="container mt-5">
+  <main class="container-fluid mt-5">
     <!--creo un h1 che mi stamperà un title in base al suo valore che dipenderà dal [type] se tittle è 'movie' avro un [type] altrimenti un altro -->
     <h1>{{title[type]}}: <span>{{listFilm.length}}</span></h1>
     

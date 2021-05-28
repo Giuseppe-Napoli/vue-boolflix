@@ -1,9 +1,9 @@
 <template>
-  <header class="container">
-    <form class="d-flex mb-5 mt-5 pt-3">
+  <header class="container pt-5">
+    <form class="d-flex pb-5  ">
       <div class="flex-grow-1 ">
         <input 
-          @keyup.enter="allSearch"
+          @keyup.enter="startSearch('all')"
           v-model.trim="strToSearch"
           class="form-control" 
           type="text"
@@ -12,7 +12,7 @@
       <div>
         <button 
           class="btn btn-primary ms-3"
-          @click.prevent="filmSearch"
+          @click.prevent="startSearch('movie')"
           >
           FILM
         </button>
@@ -20,7 +20,7 @@
       <div>
         <button 
           class="btn btn-primary ms-3"
-          @click.prevent="tvSearch"
+          @click.prevent="startSearch('tv')"
           >
           SERIE-TV
         </button>
@@ -28,7 +28,7 @@
       <div>
         <button 
           class="btn btn-primary ms-3"
-          @click.prevent="allSearch"
+          @click.prevent="startSearch('all')"
           >
           TUTTO
         </button>
@@ -48,8 +48,8 @@ export default {
   },
 
   methods:{
-    filmSearch(){
-      this.$emit("searchFilm",{text:this.strToSearch,type:'movie'})
+    startSearch(type){
+      this.$emit("searchFilm",{text:this.strToSearch,type:type})
     },
     tvSearch(){
       this.$emit("searchFilm",{text:this.strToSearch,type:'tv'})
@@ -64,6 +64,5 @@ export default {
 <style lang="scss" scoped>
   header{
     height: 70px;
-    background-color: rgba(0,0,0,0.5);
   }
 </style>
