@@ -1,10 +1,10 @@
 <template>
-  <main class="container-fluid mt-5">
+  <main class="container">
     <!--creo un h1 che mi stamperà un title in base al suo valore che dipenderà dal [type] se tittle è 'movie' avro un [type] altrimenti un altro -->
-    <h1>{{title[type]}}: <span>{{listFilm.length}}</span></h1>
-    
+    <h1 v-if="listFilm.length > 0">{{title[type]}}</h1>
 
-    <div class="d-flex flex-wrap">
+
+    <div class=" row">
     <!-- ciclo i miei film nella listFilm e li stampo all'interno della main grazie al v-bind di film, precedentemente dichiarato nel comp film.vue attraverso il props-->
       <Film 
           v-for="film in listFilm"
@@ -23,8 +23,16 @@ export default {
   data(){
     return{
       title:{
-        'movie': 'Film Trovati',
-        'tv': 'Serie-TV Trovate',
+        'movie': 'Film ',
+        'tv': 'Serie-TV ',
+      }
+    }
+  },
+
+  methods: {
+    titleNo(){
+      if(this.listFilm.movie.lenght == 0){
+        return "<h1>niente</h1>"
       }
     }
   },
@@ -44,5 +52,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  
+  main{
+    margin-top: 70px;
+    padding-top: 70px;
+    h1{
+      color:#e50914;
+      margin: 0 0 50px 20px;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 45px;
+      text-shadow: 0 5px 8px black;
+    }
+  }
 </style>

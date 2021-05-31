@@ -1,24 +1,26 @@
 <template>
-  <div class="disc flip-card text-center">
-    <div class=" mb-5 p-2  d-flex justify-content-center align-items-center flip-card-inner">
-      <div class=" flip-card-front">
-        <img class="p-3" v-if="this.film.poster_path !== null" :src="getImg(film.poster_path)" :alt="film.title||film.name">
-        <div v-if="this.film.poster_path == null" class="box-undefined text-uppercase">--err--</div>
+<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3  mb-5 ">
+  <div class="disc flip-card  d-flex justify-content-center align-items-center">
+    <div class=" mb-5 p-2   flip-card-inner d-flex justify-content-center align-items-center ">
+      <div class=" flip-card-front   ">
+        <img class="p-3 " v-if="this.film.poster_path !== null" :src="getImg(film.poster_path)" :alt="film.title||film.name">
+        <div v-else class="box-undefined text-uppercase">- image not found -</div>
       </div>
-      <div class="flip-card-back d-flex justify-content-center flex-column p-5">
+      <div class="flip-card-back d-flex justify-content-center flex-column p-3">
         <ul>
           <li>
-            Titolo: {{film.title || film.name}}
+             <strong> Titolo: </strong> {{film.title || film.name}}
+          </li>
+          <li v-if="clearTitle()">
+            <strong> Titolo Originale:  </strong> {{film.original_title || film.original_name}}
           </li>
           <li>
-            Titolo Originale: {{film.original_title || film.original_name}}
+            <strong> Lingua:  </strong> <flag :iso="transformBand()"/>
           </li>
-          <li class="d-flex justify-content-center">
-            Lingua: <flag :iso="transformBand()"/>
+          <li class="d-flex justify-content-start align-items-center pb-1">
+            <strong> Voto:  </strong> <Rating :grade= getVoto() :maxStars="5" />
           </li>
-          <li class="d-flex justify-content-center">
-            Voto: <Rating :grade= getVoto() :maxStars="5" />
-          </li>
+          <li v-if="lastMessage()"> <strong> Trama:  </strong> {{film.overview}}</li>
         </ul>
       
   <!-- <div class="lang mt-2 mb-2">
@@ -29,6 +31,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -36,7 +39,7 @@ import Rating from './Rating.vue'
 export default {
   name: 'Film',
   components: {
-    Rating
+    Rating,
   },
     beforeCreate: function() {
     document.body.className = 'home';
@@ -47,6 +50,20 @@ export default {
   },
   methods: {
 
+    //funzione che evita di ripetere i titoli qualora fossero uguali
+    clearTitle(){
+      if(this.film.original_title !== this.film.title ){
+        return this.film.original_title
+      }
+    },
+    // funzione per testo
+    lastMessage(){
+      if(this.film.overview.length > 200){
+          this.film.overview = this.film.overview.slice(0,200) + "...";
+      }
+      return this.film.overview
+    },
+    
     //funzione che mi ritorna il voto da 1 a 5
     getVoto(){
       return Math.ceil((this.film.vote_average * 5) / 10)
@@ -116,34 +133,22 @@ export default {
 
 
   .disc{
-  flex-basis: calc((100%  / 4) - 20px);
-  margin: 0 10px;
-
- 
-    
 
     .flag-icon-gb.flag-icon-squared{
       width: 22px;
       margin-bottom: 2px;
     }
     .box-undefined{
-      width: 100%;
-      height: auto;
-      margin: 25px ;
+      min-height: 410px;
+      min-width: 280px;
       border-radius: 10px;
-      line-height: 300px;
-      background-color: rgba(245, 239, 239, 0.7);
+      line-height: 410px;
+      background-color: rgba(0,0,0,0.6);
+      box-shadow: 0 10px 20px  rgba(0,0,0,1);
       text-align: center;
+      color: white;
     }
-      /*     .lang{
-      h4{
-        color:cornflowerblue
-      }
-      img{
-        width: 70px;
-        height: 30px;
-      }
-
-    } */
+      
 }
+  
 </style>

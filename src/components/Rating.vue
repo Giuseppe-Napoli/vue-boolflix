@@ -5,11 +5,6 @@
       <i :class="star <= stars ? 'fas fa-star' : 'far fa-star'"></i> 
       </li>
     </ul>
-<!--     <div v-if="hasCounter" class="info counter">
-      <span class="score-rating">{{ stars }}</span>
-      <span class="divider">/</span>
-      <span class="score-max">{{ maxStars }}</span>
-    </div> -->
   </div>
 </template>
 <script>

@@ -7,13 +7,10 @@
     <!-- chiamando l'API nel App.vue dovro passare l'array listFilm nella props della Main.vue a quel punto ciclerò tutti i film che mi ritorneranno indietro grazie al bind di listFilm-->
     <!-- main per film che mostrerò solo se avrà un contenuto  -->
     <Main 
-    v-if="listFilm.movie.length > 0" 
     :listFilm="listFilm.movie"
     type='movie'/>
-
     <!-- main per serie-tv che mostrerò solo se avrà un contenuto -->
     <Main 
-    v-if="listFilm.tv.length > 0"
     :listFilm="listFilm.tv"
     type='tv'/>
 
@@ -48,7 +45,37 @@ export default {
     }
     
   },
+    created(){
+      let type = 'movie'
+      axios.get('https://api.themoviedb.org/3/movie/popular',{
+          params:{
+            api_key: this.api_key,
+            language: 'it-IT'
+          }
+        })
+        .then(res => {
+           this.listFilm[type] = res.data.results;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      
+      let typeTv = 'tv'
+      axios.get('https://api.themoviedb.org/3/tv/popular',{
+          params:{
+            api_key: this.api_key,
+            language: 'it-IT'
+          }
+        })
+        .then(res => {
+           this.listFilm[typeTv] = res.data.results;
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
    methods: {
+
      /* gli passo un obj che attraverso l'emit fatto sul header memorizzerà i valori di text e type provenienti da header.vue */
      searching(obj){
        this.resetArr();
@@ -78,7 +105,6 @@ export default {
         })
         .then(res =>{
           this.listFilm[type] = res.data.results
-          console.log('---->',this.page);
         })
         .catch(err => {
           console.log(err);
@@ -97,6 +123,9 @@ export default {
   body{
     background-image: url('~@/assets/img/netflix.jpg');
     height: 100vh;
+  }
+  #app{
+    background-color: rgba(255, 255, 255, 0.3);
   }
 
 </style>
