@@ -1,6 +1,7 @@
 <template>
-<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3  mb-5 ">
-  <div class="disc flip-card  d-flex justify-content-center align-items-center">
+
+  
+  <div class="  flip-card ">
     <div class=" mb-5 p-2   flip-card-inner d-flex justify-content-center align-items-center ">
       <div class=" flip-card-front   ">
         <img class="p-3 " v-if="this.film.poster_path !== null" :src="getImg(film.poster_path)" :alt="film.title||film.name">
@@ -31,7 +32,7 @@
       </div>
     </div>
   </div>
-</div>
+
 </template>
 
 <script>
@@ -132,8 +133,6 @@ export default {
 
 
 
-  .disc{
-
     .flag-icon-gb.flag-icon-squared{
       width: 22px;
       margin-bottom: 2px;
@@ -149,6 +148,6 @@ export default {
       color: white;
     }
       
-}
+
   
 </style>

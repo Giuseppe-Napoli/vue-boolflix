@@ -45,7 +45,9 @@ export default {
     }
     
   },
+
     created(){
+      // chiamata api per i film popolari
       let type = 'movie'
       axios.get('https://api.themoviedb.org/3/movie/popular',{
           params:{
@@ -60,6 +62,7 @@ export default {
           console.log(err);
         });
       
+      // chiamata api per le serie tv popolari
       let typeTv = 'tv'
       axios.get('https://api.themoviedb.org/3/tv/popular',{
           params:{
@@ -74,8 +77,8 @@ export default {
           console.log(err);
         })
     },
+    
    methods: {
-
      /* gli passo un obj che attraverso l'emit fatto sul header memorizzerà i valori di text e type provenienti da header.vue */
      searching(obj){
        this.resetArr();

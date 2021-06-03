@@ -1,7 +1,11 @@
 <template>
-  <div class="rating">
+  <div>
     <ul class="list">
-      <li @click="rate(star)" v-for="(star,index) in maxStars" :class="{ 'active': star <= stars }" :key="index" class="star">
+      <li @click="rate(star)" 
+      v-for="(star,index) in maxStars" 
+      :class="{ 'active': star <= stars }" 
+      :key="index" 
+      class="star">
       <i :class="star <= stars ? 'fas fa-star' : 'far fa-star'"></i> 
       </li>
     </ul>
