@@ -2,9 +2,9 @@
 
   
   <div class="  flip-card ">
-    <div class=" mb-5 p-2   flip-card-inner d-flex justify-content-center align-items-center ">
+    <div class=" mb-1 p-2   flip-card-inner d-flex justify-content-center align-items-center ">
       <div class=" flip-card-front   ">
-        <img class="p-3 " v-if="this.film.poster_path !== null" :src="getImg(film.poster_path)" :alt="film.title||film.name">
+        <img class="p-1" v-if="this.film.poster_path !== null" :src="getImg(film.poster_path)" :alt="film.title||film.name">
         <div v-else class="box-undefined text-uppercase">- image not found -</div>
       </div>
       <div class="flip-card-back d-flex justify-content-center flex-column p-3">
@@ -59,8 +59,8 @@ export default {
     },
     // funzione per testo
     lastMessage(){
-      if(this.film.overview.length > 200){
-          this.film.overview = this.film.overview.slice(0,200) + "...";
+      if(this.film.overview.length > 180){
+          this.film.overview = this.film.overview.slice(0,180) + "...";
       }
       return this.film.overview
     },

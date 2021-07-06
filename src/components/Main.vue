@@ -3,15 +3,17 @@
     <!--creo un h1 che mi stamperà un title in base al suo valore che dipenderà dal [type] se tittle è 'movie' avro un [type] altrimenti un altro -->
     <h1>{{title[type]}}</h1>
 
-
     <!-- ciclo i miei film nella listFilm e li stampo all'interno della main grazie al v-bind di film, precedentemente dichiarato nel comp film.vue attraverso il props-->
     <!-- <i @click="scroll_left()" class="fas fa-chevron-left"></i> -->
-        <VueSlickCarousel  :arrows="true" :dots="true" v-bind="settings">
-        <Film 
-            v-for="film in listFilm"
-            :key="film.id"
-            :film="film" />
-        </VueSlickCarousel>
+        <div v-if="listFilm.length > 0">
+          <VueSlickCarousel :arrows="true" :dots="true" v-bind="settings">
+            <Film 
+                v-for="film in listFilm"
+                :key="film.id"
+                :film="film" />
+          </VueSlickCarousel>
+        </div>
+        
      <!--  <i @click="scroll_right()" class="fas fa-chevron-right"></i> -->
   </main>
 </template>
@@ -29,74 +31,82 @@ export default {
       Film,
       VueSlickCarousel
   },
+  
   data(){
     return{
       title:{
         'movie': 'Film ',
         'tv': 'Serie-TV ',
       },
-       settings:{
-                "centerMode": true,
-                "centerPadding": "10%",
-                "focusOnSelect": true,
-                "infinite": true,
-                "slidesToShow": 4,
-                "speed": 500,
-                "responsive": [
-                    {
-                    "breakpoint": 1300,
-                    "settings": {
-                        "slidesToShow": 3
-                    }
-                    },
-                    {
-                    "breakpoint": 900,
-                    "settings": {
-                        "slidesToShow": 3,
-                        "centerPadding": "5%",
-                        "arrows":false
-                    }
-                    },
-                    {
-                    "breakpoint": 700,
-                    "settings": {
-                        "slidesToShow": 2,
-                        "centerPadding": "15%",
-                        "arrows":false
-                    }
-                    },
-                    {
-                    "breakpoint": 550,
-                    "settings": {
-                        "slidesToShow": 2,
-                        "centerPadding": "5%",
-                        "arrows":false
-                    }
-                    },
-                    {
-                    "breakpoint": 450,
-                    "settings": {
-                        "slidesToShow": 1,
-                        "centerPadding": "20%",
-                        "arrows":false
-                    }
-                    },
-                    {
-                    "breakpoint": 375,
-                    "settings": {
-                        "slidesToShow": 1,
-                        "centerPadding": "15%",
-                        "arrows":false
-                    }
-                    }
-                ]
+      settings:{
+
+        "centerMode": true,
+        "centerPadding": "10%",
+        "focusOnSelect": true,
+        "infinite": true,
+        "slidesToShow": 4,
+        "speed": 500,
+        "responsive": [
+          {
+            "breakpoint": 1400,
+            "settings": {
+              "slidesToShow": 3.5,
             }
+          },
+
+          {
+            "breakpoint": 1200,
+            "settings": {
+            "slidesToShow": 3,
+            "centerPadding": "8%",
+            "arrows":false
+            }
+          },
+          {
+            "breakpoint": 990,
+            "settings": {
+            "slidesToShow": 2.5,
+            "centerPadding": "3%",
+            "arrows":true
+            }
+          },
+          {
+            "breakpoint": 770,
+            "settings": {
+            "slidesToShow": 2,
+            "centerPadding": "2%",
+            "arrows":true
+            }
+          },
+          {
+            "breakpoint": 580,
+            "settings": {
+            "slidesToShow": 1.5,
+            "centerPadding": "7%",
+            "arrows":false
+            }
+          },
+          {
+            "breakpoint": 450,
+            "settings": {
+            "slidesToShow": 1.5,
+            "centerPadding": "5%",
+            "arrows":false
+            }
+          },
+          {
+            "breakpoint": 375,
+            "settings": {
+            "slidesToShow": 1,
+            "centerPadding": "5%",
+            "arrows":false
+            } 
+          }
+        ]
+      }
       
     }
   },
-    
-      
- 
 
 
   methods: {
@@ -164,11 +174,20 @@ export default {
     } */
     h1{
       color:#e50914;
-      margin: 0 0 20px 20px;
+      margin: 0 0 15px 15px;
       text-transform: uppercase;
       font-weight: 900;
-      font-size: 50px;
+      font-size: 55px;
       text-shadow: 0 5px 8px black;
     }
+    .slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 50px;
+    line-height: 1;
+    opacity: 0.75;
+    color: rgb(177, 32, 32);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
   }
 </style>

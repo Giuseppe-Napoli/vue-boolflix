@@ -1,17 +1,21 @@
 <template>
   <header class="container-fluid">
     <div class="ps-5">
-      <img class="float-start" src="../assets/img/logo.png" alt="">
+      <a href="/">
+        <img class="float-start" src="../assets/img/logo.png" alt="logo_netflix">
+      </a>
+      
     </div>
     <form class="d-flex float-end">
-      <div class="flex-grow-1 prova">
-        <i class="fas fa-search float-end"></i>
+      <div class="flex-grow-1">
+        
         <input 
           @keyup.enter="startSearch('all')"
           v-model.trim="strToSearch"
           class="form-control float-end" 
           type="text"
           placeholder="Cerca...">
+
       </div>
       <div>
         <button 
@@ -26,7 +30,7 @@
           class="btn red-btn-gn ms-2"
           @click.prevent="startSearch('tv')"
           >
-          SERIE-TV
+          TV
         </button>
       </div>
 
@@ -68,12 +72,8 @@ export default {
     }
     form{
       width: 30%;
-      .prova{
-        &:hover input{
-          display: block;
-        }
-        
-      }
+      display: block;
+      
       .fa-search{
         color: #e50914;
         margin: 10px;
@@ -83,7 +83,6 @@ export default {
       }
       input{
         width: 80%;
-        display: none;
       }
     }
     .red-btn-gn{
